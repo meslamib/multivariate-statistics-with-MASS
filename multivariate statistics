@@ -1,0 +1,20 @@
+## multivariate statistics from R workshop
+europe <- read.csv("country.csv")
+names(europe)
+head(europe,10)
+tail(europe, 3)
+cor(europe[,3:11])
+install.packages("MASS")
+library(MASS)
+#principle component says how many components are enough to an acceptable degree to describe
+europca <- princomp(europe[,3:11], cor=TRUE,scores=TRUE)
+europca
+head(europca)
+summary(europca,loadings=TRUE)
+scores <- europca$scores
+par(mfrow=c(5,5,4,4))
+plot(c(-7,3),c(-3,4),xlab="PC1",ylab="PC2",type="n",las=1)
+text(scores[,1],scores[,2],europe$Country)
+
+plot(c(-7,3),c(-3,4),xlab="PC1",ylab="PC2",type="n",las=1)
+text(scores[,1],scores[,2],europe$Group)

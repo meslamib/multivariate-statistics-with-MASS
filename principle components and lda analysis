@@ -18,3 +18,9 @@ text(scores[,1],scores[,2],europe$Country)
 
 plot(c(-7,3),c(-3,4),xlab="PC1",ylab="PC2",type="n",las=1)
 text(scores[,1],scores[,2],europe$Group)
+
+
+empdisc <- lda(europe[,3:11],as.factor(europe$Group),CV=TRUE)
+results<-as.data.frame(empdisc$posterior)
+results$observed<-europe$Group
+sum(results$observed==results$predicted)/nrow(results)
